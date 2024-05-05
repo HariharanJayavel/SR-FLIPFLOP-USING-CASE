@@ -34,14 +34,41 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
+1. Inputs and Outputs: 
+   The module sr_flipflop has inputs s, r, clk, and reset, and outputs q and q_bar.
+   
+2. Clocked Process:
+   The always @(posedge clk) block defines a clocked process sensitive to the positive edge of the clock signal.
+   
+3. Reset Handling:
+   If the reset signal is asserted (logic low), the flip-flop resets. In this case, the output q is forced to 0.
+   
+4. State Transition:
+   If the reset signal is de-asserted (logic high), the flip-flop behaves according to the inputs s (set) and r (reset). It uses a case statement to determine the behavior 
+   based on the combination of s and r:
+   
+   If s=0 and r=1 (set condition), the output q is set to 0.
+   
+   If s=1 and r=0 (reset condition), the output q is set to 1.
+   
+   If s=1 and r=1 (invalid condition), the output q enters an indeterminate state (x).
+   
+   For all other combinations of s and r, the output q remains unchanged.
+   
+6. Output Complementation:
+   The output q_bar is complemented (~q), i.e., the logical negation of q.
+
+
+
+
+
+**PROGRAM**
+
 Program for flipflops and verify its truth table in quartus using Verilog programming.
 
 Developed by: HARIHARAN J
 
 RegisterNumber: 212223240047
-
-
-**PROGRAM**
 
 ```
 module sr_flipflop(q, q_bar, s, r, clk, reset);
